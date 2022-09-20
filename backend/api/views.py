@@ -8,16 +8,16 @@ from .models import Livre
 
 # Create your views here.
 
-class LivreMixins(generics.GenericAPIView,mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.ListModelMixin):
+class LivreMixins(generics.GenericAPIView,mixins.CreateModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin):
     queryset = Livre.objects.all()
     serializer_class = LivreSerializer
     lookup_field = 'pk'
     def perform_create(self, serializer):
-        name=serializer.validated_data.get('titre')
-        content=serializer.validated_data.get('description') or None
-        if content is None:
-            content= name
-        serializer.save(content=content , user=self.request.user)
+        titre=serializer.validated_data.get('titre')
+        description=serializer.validated_data.get('description') or None
+        if description is None:
+            description= titre
+        serializer.save(description=description)
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')

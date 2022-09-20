@@ -87,6 +87,9 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'UPLOADED_FILES_USE_URL': False
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
